@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Dent-O-Face"
+description = "A premium, responsive clinic website for Dent-O-Face, a multi-speciality dental and maxillofacial centre in Model Town, Hisar. Features clinic information, natural imagery, smooth scroll animations, services, doctor profile, testimonials, map directions, and a WhatsApp appointment form."
+version = "1.0.0"
+id = "artifacts/dent-o-face"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18151
+
+[services.development]
+run = "pnpm --filter @workspace/dent-o-face run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/dent-o-face", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/dent-o-face/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18151"
+BASE_PATH = "/"
